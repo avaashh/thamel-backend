@@ -33,5 +33,4 @@ func EventServer(w http.ResponseWriter, r *http.Request) {
 	}
 	// Write the JSON response
 	writeResponseToStreamEs(w, dist.IndivEvent(slug))
-
 }

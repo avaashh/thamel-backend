@@ -40,16 +40,19 @@ type Response25 struct {
 
 // Individual Event Response fetched from 25 live will be cast to ResponseIE
 type ResponseIE struct {
-	Id               string      `json:"id"`
-	Start_date       string      `json:"ts_start"`
-	Href             string      `json:"href"`
-	Title            string      `json:"title"`
-	Tags             interface{} `json:"tags"`
-	Categories       interface{} `json:"categories"`
-	Tag_classes      interface{} `json:"tag_classes"`
-	Category_classes interface{} `json:"category_classes"`
-	Summary          string      `json:"summary"`
-	Image_src        string      `json:"image_src"`
+	Id                  int         `json:"id"`
+	Start_date          int         `json:"ts_start"` // in epoch time
+	Href                int         `json:"href"`     // in epoch time
+	Title               string      `json:"title"`
+	Location            string      `json:"location"`
+	Description         string      `json:"description"`
+	Image               string      `json:"image_src"` // url
+	Tags                interface{} `json:"tags_calendar"`
+	Contact_info        string      `json:"contact_info"`
+	Categories          interface{} `json:"categories"`
+	Categories_audience interface{} `json:"categories_audience"`
+	Category_classes    interface{} `json:"category_classes"`
+	Summary             string      `json:"summary"`
 }
 
 func NullResponse25() Response25 {
@@ -67,15 +70,18 @@ func NullResponse25() Response25 {
 
 func NullResponseIE() ResponseIE {
 	return ResponseIE{
-		Id:               "",
-		Start_date:       "",
-		Href:             "",
-		Title:            "",
-		Tags:             nil,
-		Categories:       nil,
-		Tag_classes:      nil,
-		Category_classes: nil,
-		Summary:          "",
-		Image_src:        "",
+		Id:                  0,
+		Start_date:          0,
+		Href:                0,
+		Title:               "",
+		Location:            "",
+		Description:         "",
+		Image:               "",
+		Tags:                nil,
+		Contact_info:        "",
+		Categories:          nil,
+		Categories_audience: nil,
+		Category_classes:    nil,
+		Summary:             "",
 	}
 }
