@@ -2,23 +2,33 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"thamel/server"
 )
 
-func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		response := map[string]int{"status": 200}
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
-		json.NewEncoder(w).Encode(response)
-	})
+func Handler(w http.ResponseWriter, r *http.Request) {
+	switch r.URL.Path {
+	case "/":
+		status(w, r)
+	case "/list":
+		server.ListServer(w, r)
+	case "/event":
+		server.EventServer(w, r)
+	default:
+		noImplementation(w, r)
+	}
+}
 
-	http.HandleFunc("/list", server.ListServer)
-	// http.HandleFunc("/tags", server.TagsServer)
-	http.HandleFunc("/event", server.EventServer)
+func status(w http.ResponseWriter, r *http.Request) {
+	response := map[string]int{"status": 200}
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(response)
+}
 
-	fmt.Println("Server has started running")
-	http.ListenAndServe("", nil)
+func noImplementation(w http.ResponseWriter, r *http.Request) {
+	response := map[string]int{"status": 501}
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusNotImplemented)
+	json.NewEncoder(w).Encode(response)
 }

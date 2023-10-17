@@ -64,10 +64,10 @@ func IndivEvent(slug string) types.ResponseIE {
 	if err != nil {
 		return types.NullResponseIE()
 	}
-	
+
 	defer resp.Body.Close()
 	bodyText, err := io.ReadAll(resp.Body)
-	
+
 	if err != nil {
 		return types.NullResponseIE()
 	}
