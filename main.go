@@ -19,6 +19,6 @@ func main() {
 	// http.HandleFunc("/tags", server.TagsServer)
 	http.HandleFunc("/event", server.EventServer)
 
-	fmt.Println("Server is running on :8080")
-	http.ListenAndServe(":8080", nil)
+	fmt.Println("Server has started running")
+	http.ListenAndServe("", nil)
 }
